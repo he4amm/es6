@@ -18,6 +18,11 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('build/css'))
 });
 
+gulp.task('copy', function () {
+    gulp.src('./src/img/*')
+        .pipe(gulp.dest('./build/img'));
+});
+
 gulp.task("webpack-dev-server", function (callback) {
     // modify some webpack config options
     var myConfig = Object.create(webpackConfig);
@@ -41,4 +46,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['js', 'sass']);
-gulp.task('default', ['js', 'sass', 'watch', 'webpack-dev-server']);
+gulp.task('default', ['js', 'sass', 'copy', 'watch', 'webpack-dev-server']);
