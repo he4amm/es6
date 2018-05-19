@@ -1,9 +1,115 @@
 .content {
     width: 100%;
+    padding: 0px 25px;
+    min-height: 400px;
     @media #{$device-phone} {
         box-shadow: none;
         margin: 10px 0px 30px;
         border-top: 1px solid $grey-color;
         border-bottom: 1px solid $grey-color;
+    }
+    .tab-content {
+        &__header {
+            color: #727e88;
+        }
+        &__button {
+            &--mobile-edit {
+                border-radius: 0px;
+                width: 30px;
+                height: 30px;
+                min-width: 30px;
+                font-size: 17px;
+                position: absolute;
+                top: 23px;
+                right: 30px;
+                background-color: #ecf1f5;
+                color: #727e88;
+                box-shadow: none;
+                @media #{$device-tablet-and-desktop} {
+                    display: none;
+                }
+            }
+        }
+        .details {
+            &-field {
+                position: relative;
+                width: fit-content;
+                &__value {
+                    width: fit-content;
+                    display: flex;
+                    @media #{$device-phone} {
+                        &--icon {
+                            padding: 5px 0px 5px 5px;
+                            color: #a8b8c4;
+                        }
+                        &--field {
+                            padding: 5px 11px;
+                            color: #333333;
+                            &:first-child {
+                                padding: 5px 0px 16px;
+                                font-weight: 700;
+                                font-size: 16px;
+                            }
+                        }
+                        &--action {
+                            display: none;
+                        }
+                    }
+                    @media #{$device-tablet-and-desktop} {
+                        &--icon {
+                            background: #f5f8f8;
+                            padding: 5px 0px 5px 8px;
+                            color: #a8b8c4;
+                        }
+                        &--field {
+                            background: #f5f8f8;
+                            padding: 5px 11px;
+                        }
+                        &--action {
+                            background: #ecf1f5;
+                            padding: 5px 11px;
+                            color: #727e88;
+                        }
+                    }
+                }
+                &__popover {
+                    position: absolute;
+                    left: 80%;
+                    top: -50px;
+                    padding: 20px;
+                    border-radius: 3px;
+                    display: none;
+                    z-index: 11;
+                    background-color: #ffffff;
+                    box-shadow: 0 0 25px 0 #bdc4c9;
+                    &:before {
+                        content: "\A";
+                        border-style: solid;
+                        border-width: 10px 15px 10px 0;
+                        border-color: transparent #fff transparent transparent;
+                        position: absolute;
+                        left: -15px;
+                        top: 54px;
+                    }
+                    &.show {
+                        display: block !important;
+                    }
+                    .mdl-textfield__label {
+                        text-transform: uppercase;
+                    }
+                    &__button {
+                        &--save {
+                            background-color: #007ee5;
+                            color: #fff;
+                        }
+                        &--cancel {
+                            color: #007ee5;
+                            background-color: #fff;
+                            border: solid 1px #007ee5;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
