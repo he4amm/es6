@@ -1,0 +1,116 @@
+.header {
+    width: 100%;
+    @media #{$device-phone} {
+        box-shadow: none;
+        background-color: transparent;
+    }
+    &__title {
+        min-height: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        @media #{$device-phone} {
+            min-height: 70px;
+        }
+    }
+    &__image {
+        &--profile {
+            width: 171px;
+            height: 171px;
+            background-image: url(../img/profile_image.jpg);
+            background-position: 215px 250px;
+            @media #{$device-phone} {}
+            @media #{$device-tablet-and-desktop} {
+                position: absolute;
+                left: 20px;
+                bottom: 20px;
+                z-index: 11;
+            }
+        }
+    }
+    &__button {
+        &--logout {
+            border: 1px solid #007ee5;
+            color: #007ee5;
+            @media #{$device-phone} {
+                border: 0px;
+            }
+        }
+        &--cover-photo {
+            border: 1px solid #d0dce7;
+            color: #d0dce7;
+            @media #{$device-phone} {
+                display: none;
+            }
+        }
+    }
+    &__details {
+        width: 98%;
+        &--image-container {
+            @media #{$device-phone} {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        @media #{$device-phone} {
+            margin-bottom: 0px;
+        }
+        @media #{$device-tablet-and-desktop} {
+            align-items: flex-start;
+            padding-left: 184px;
+        }
+        &--name {
+            font-weight: 700;
+            margin-bottom: 0px;
+            font-size: 1.2em;
+            @media #{$device-phone} {
+                align-self: center;
+                padding-bottom: 15px;
+            }
+        }
+        &--location,
+        &--number {
+            margin-bottom: 0px;
+            span {
+                padding-left: 10px;
+            }
+        }
+    }
+    &__review {
+        display: flex;
+        justify-content: flex-end;
+        @media #{$device-phone} {
+            justify-content: flex-start;
+            flex-direction: column;
+            margin-top: 0px;
+        }
+        @media #{$device-tablet} {
+            padding-left: 184px;
+            justify-content: flex-start;
+        }
+        &--stars {
+            @media #{$device-phone} {
+                i {
+                    color: #007ee5;
+                    font-size: 1.8em;
+                }
+            }
+        }
+        &--count {
+            @media #{$device-tablet-and-desktop} {
+                padding-left: 20px;
+            }
+        }
+    }
+    &__menus {
+        @media #{$device-tablet-and-desktop} {
+            padding-left: 184px;
+        }
+        padding: 0px;
+        border-bottom: 0px;
+    }
+}

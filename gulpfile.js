@@ -13,7 +13,7 @@ gulp.task('js', () => {
 });
 
 gulp.task('sass', function () {
-    return gulp.src('src/scss/*.scss')
+    return gulp.src('src/scss/style.scss')
         .pipe(sass())
         .pipe(gulp.dest('build/css'))
 });
