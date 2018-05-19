@@ -30,8 +30,8 @@
     }
     &__button {
         &--logout {
-            border: 1px solid #007ee5;
-            color: #007ee5;
+            border: 1px solid $blue-color;
+            color: $blue-color;
             @media #{$device-phone} {
                 border: 0px;
             }
@@ -67,6 +67,7 @@
             font-weight: 700;
             margin-bottom: 0px;
             font-size: 1.2em;
+            color: $main-font-color;
             @media #{$device-phone} {
                 align-self: center;
                 padding-bottom: 15px;
@@ -95,7 +96,7 @@
         &--stars {
             @media #{$device-phone} {
                 i {
-                    color: #007ee5;
+                    color: $blue-color;
                     font-size: 1.8em;
                 }
             }
@@ -107,10 +108,63 @@
         }
     }
     &__menus {
-        @media #{$device-tablet-and-desktop} {
-            padding-left: 184px;
-        }
         padding: 0px;
         border-bottom: 0px;
+        display: flex;
+        justify-content: space-between;
+        @media #{$device-phone} {
+            flex-direction: column-reverse;
+            border-top: 0px !important;
+            padding-bottom: 10px;
+        }
+        @media #{$device-tablet-and-desktop} {
+            padding-left: 193px;
+        }
+        &--buttons {
+            background: #fff;
+            white-space: nowrap;
+            overflow-y: scroll;
+            @media #{$device-phone} {
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            }
+            .mdl-button {
+                color: $main-font-color;
+                border-radius: 0px;
+                height: 50px;
+                font-size: 12px;
+                &.active {
+                    border-bottom: 2px solid $blue-color;
+                }
+            }
+        }
+        &--followers {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            @media #{$device-phone} {
+                justify-content: flex-start;
+                padding: 0px 0px 20px 16px;
+            }
+            .mdl-button {
+                height: 25px;
+                min-width: 25px;
+                width: 20px;
+                background: $grey-color;
+                color: white;
+                @media #{$device-phone} {
+                    margin: 0px;
+                }
+            }
+            .followers-count {
+                font-size: 12px;
+                &__text {
+                    color: $grey-color;
+                    padding-right: 18px;
+                }
+                &__number {
+                    padding-left: 5px;
+                }
+            }
+        }
     }
 }

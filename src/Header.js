@@ -14,8 +14,8 @@ class AppHeader extends HTMLElement {
         this.logoutButton = this.querySelector('.header__button--logout');
         this.uploadCoverPhotoButton = this.querySelector('.header__button--cover-photo');
 
-        this.headerMenus = this.querySelector('.mdl-tabs__tab');
-        this.headerMenus.addEventListener('click', () => this.changeView());
+        // this.headerMenus = this.querySelector('.mdl-tabs__tab');
+        // this.headerMenus.addEventListener('click', () => this.changeView());
         this.logoutButton.addEventListener('click', () => this.logout());
         this.uploadCoverPhotoButton.addEventListener('click', () => this.uploadCoverPhoto());
 
@@ -96,19 +96,39 @@ AppHeader.TEMPLATE = `
     </div>
 
     <div class="header__menus mdl-card__actions mdl-card--border">
-        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-            <div class="mdl-tabs__tab-bar">
-                <a href="#starks-panel" class="mdl-tabs__tab is-active">Starks</a>
-                <a href="#lannisters-panel" class="mdl-tabs__tab">Lannisters</a>
-                <a href="#targaryens-panel" class="mdl-tabs__tab">Targaryens</a>
-            </div>
+        <div class="header__menus--buttons">
+            <button class="mdl-button mdl-js-button mdl-button--accent active">
+                About
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--accent">
+                Settings
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--accent">
+                Option1
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--accent">
+                Option2
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--accent">
+                Option3
+            </button>
+        </div>
+        <div class="header__menus--followers">
+            <button class="followers__button--add mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+                <i class="material-icons">add</i>
+            </button>
+            <span class="followers-count">
+                <span class="followers-count__number">15</span>
+                <span class="followers-count__text">followers</span>
+            </span>
         </div>
     </div>
     <div class="mdl-card__menu">
         <button class="header__button--logout mdl-button mdl-js-button">
             LOG OUT
         </button>
-    </div>`;
+    </div>
+    `;
 
 AppHeader.CLASSES = ['header', 'demo-card-wide', 'mdl-card', 'mdl-shadow--2dp'];
 

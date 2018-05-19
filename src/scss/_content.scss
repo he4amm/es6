@@ -1,0 +1,9 @@
+.content {
+    width: 100%;
+    @media #{$device-phone} {
+        box-shadow: none;
+        margin: 10px 0px 30px;
+        border-top: 1px solid $grey-color;
+        border-bottom: 1px solid $grey-color;
+    }
+}

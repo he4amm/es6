@@ -1,10 +1,16 @@
 .app {
-    background-color: #f5f8f9;
+    background-color: $main-bg-color;
     &__container {
         @media #{$device-phone} {
             padding: 0px;
         }
         .header-container {
+            @media #{$device-phone} {
+                width: 100% !important;
+                margin: 0px;
+            }
+        }
+        .content-container {
             @media #{$device-phone} {
                 width: 100% !important;
                 margin: 0px;
