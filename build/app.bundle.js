@@ -9062,62 +9062,125 @@ var MyApp = function () {
 
         this.xDown = null;
         this.yDown = null;
+        this.user = this.getUserInfo();
+
+        this.headerUserName = document.querySelector('.header__info--name');
+        this.headerUserLocation = document.querySelector('.header__info--location span');
+        this.headerUserNumber = document.querySelector('.header__info--number span');
+        this.reviewsCount = document.querySelector('.header__review--count');
+        this.reviewsStars = document.querySelectorAll('.header__review--stars>.icon');
+        this.nameField = document.querySelector('.field-js-name > .details-field__value--field');
+        this.webField = document.querySelector('.field-js-web > .details-field__value--field');
+        this.numberField = document.querySelector('.field-js-number > .details-field__value--field');
+        this.locationField = document.querySelector('.field-js-location > .details-field__value--field');
+
+        this.mobileEditButton = document.querySelector('.tab-content__button--mobile-edit');
+        this.mobileFormCanelButton = document.querySelector('.mobile-form-actions__button--cancel');
+        this.mobileFormSaveButton = document.querySelector('.mobile-form-actions__button--save');
 
         this.tabContents = document.querySelectorAll('.content > .tab-content');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = this.tabContents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var tab = _step.value;
-
-                tab.addEventListener('touchstart', this.handleTouchStart.bind(this), false);
-                tab.addEventListener('touchmove', this.handleTouchMove.bind(this), false);
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-
         this.tabButtons = document.querySelectorAll('.header__menus--buttons > a');
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        this.desktopEditField = document.querySelectorAll('.details-field__value--action');
+        this.popoverCanelButton = document.querySelectorAll('.details-field__popover__button--cancel');
+        this.popoverSaveButton = document.querySelectorAll('.details-field__popover__button--save');
 
-        try {
-            for (var _iterator2 = this.tabButtons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var button = _step2.value;
-
-                button.addEventListener('click', this.activeTabContent.bind(this));
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
-                }
-            }
-        }
+        this.registerMobileEvents();
+        this.registerDesktopEvents();
+        this.updateHeader(this.user);
+        this.updateContent(this.user);
     }
 
     _createClass(MyApp, [{
+        key: "updateHeader",
+        value: function updateHeader(user) {
+            this.headerUserName.textContent = user.first_name + " " + user.last_name;
+            this.headerUserLocation.textContent = "" + user.location;
+            this.headerUserNumber.textContent = "" + user.number;
+            this.reviewsCount.textContent = user.viewsCount + " Reviews";
+            this.calcStars(this.reviewsStars, user.stars);
+        }
+    }, {
+        key: "updateContent",
+        value: function updateContent(user) {
+            this.nameField.textContent = user.first_name + " " + user.last_name;
+            this.webField.textContent = user.web;
+            this.numberField.textContent = user.number;
+            this.locationField.textContent = user.location;
+        }
+    }, {
+        key: "registerMobileEvents",
+        value: function registerMobileEvents() {
+            this.mobileEditButton.addEventListener('click', this.showMoblieForm.bind(this));
+            this.mobileFormCanelButton.addEventListener('click', this.hideMoblieForm.bind(this));
+            this.mobileFormSaveButton.addEventListener('click', this.saveMobileForm.bind(this));
+        }
+    }, {
+        key: "registerDesktopEvents",
+        value: function registerDesktopEvents() {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.tabContents[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var tab = _step.value;
+
+                    tab.addEventListener('touchstart', this.handleTouchStart.bind(this), false);
+                    tab.addEventListener('touchmove', this.handleTouchMove.bind(this), false);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = this.tabButtons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var button = _step2.value;
+
+                    button.addEventListener('click', this.activeTabContent.bind(this));
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            for (var i = 0; i < this.desktopEditField.length; i++) {
+                this.desktopEditField[i].addEventListener('click', this.showDesktopPopover.bind(this));
+            }
+
+            for (var i = 0; i < this.popoverCanelButton.length; i++) {
+                this.popoverCanelButton[i].addEventListener('click', this.hideDesktopPopover.bind(this));
+            }
+
+            for (var i = 0; i < this.popoverSaveButton.length; i++) {
+                this.popoverSaveButton[i].addEventListener('click', this.savePopoverValue.bind(this));
+            }
+        }
+    }, {
         key: "activeTabContent",
         value: function activeTabContent(evt) {
             var tabID = evt.target.href.split('#')[1];
@@ -9189,6 +9252,110 @@ var MyApp = function () {
             this.xDown = null;
             this.yDown = null;
         }
+    }, {
+        key: "showMoblieForm",
+        value: function showMoblieForm(evt) {
+            var fields = evt.target.closest('.tab-content').querySelectorAll('.mobile-form .mobile-form-field input');
+
+            for (var i = 0; i < fields.length; i++) {
+                fields[i].value = this.user[fields[i].getAttribute('name')];
+                fields[i].parentNode.classList.add('is-dirty');
+            }
+
+            evt.target.closest('.details').classList.add('hide');
+            evt.target.closest('.tab-content').querySelector('.mobile-form').classList.remove('hide');
+        }
+    }, {
+        key: "hideMoblieForm",
+        value: function hideMoblieForm(evt) {
+            evt.target.closest('.mobile-form').classList.add('hide');
+            evt.target.closest('.tab-content').querySelector('.details').classList.remove('hide');
+        }
+    }, {
+        key: "saveMobileForm",
+        value: function saveMobileForm(evt) {
+            var formFields = evt.target.closest('.tab-content').querySelectorAll('.mobile-form .mobile-form-field input');
+            var viewFields = Array.from(evt.target.closest('.tab-content').querySelectorAll('.details .details-field .details-field__value--field'));
+
+            for (var i = 0; i < formFields.length; i++) {
+                this.user[formFields[i].getAttribute('name')] = formFields[i].value;
+
+                if (formFields[i].getAttribute('name') === 'first_name') {
+                    viewFields.find(function (field) {
+                        return field.getAttribute('for') === 'name';
+                    }).textContent = formFields[i].value;
+                } else if (formFields[i].getAttribute('name') === 'last_name') {
+                    viewFields.find(function (field) {
+                        return field.getAttribute('for') === 'name';
+                    }).textContent += ' ' + formFields[i].value;
+                } else {
+                    viewFields.find(function (field) {
+                        return field.getAttribute('for') === formFields[i].getAttribute('name');
+                    }).textContent = formFields[i].value;
+                }
+            }
+
+            this.hideMoblieForm(evt);
+            this.updateHeader(this.user);
+        }
+    }, {
+        key: "showDesktopPopover",
+        value: function showDesktopPopover(evt) {
+            var fieldType = evt.target.closest('.details-field__value').querySelector('.details-field__value--field').getAttribute('for');
+            var popover = evt.target.closest('.details-field').querySelector('.details-field__popover');
+            var popoverInput = evt.target.closest('.details-field').querySelector('.details-field__popover .mdl-textfield__input');
+
+            if (fieldType !== 'name') {
+                popoverInput.value = this.user[fieldType];
+            } else {
+                popoverInput.value = this.user['first_name'] + " " + this.user['last_name'];
+            }
+
+            popoverInput.parentNode.classList.add('is-dirty');
+            popover.classList.add('show');
+        }
+    }, {
+        key: "hideDesktopPopover",
+        value: function hideDesktopPopover(evt) {
+            evt.target.closest('.details-field__popover').classList.remove('show');
+        }
+    }, {
+        key: "savePopoverValue",
+        value: function savePopoverValue(evt) {
+            var popoverInput = evt.target.closest('.details-field__popover').querySelector('.mdl-textfield__input');
+            var viewField = evt.target.closest('.details-field').querySelector('.details-field__value--field');
+
+            viewField.textContent = popoverInput.value;
+            if (popoverInput.getAttribute('name') !== 'name') {
+                this.user[popoverInput.getAttribute('name')] = popoverInput.value;
+            } else {
+                this.user['first_name'] = popoverInput.value.split(' ')[0];
+                this.user['last_name'] = popoverInput.value.split(' ')[1];
+            }
+
+            this.hideDesktopPopover(evt);
+            this.updateHeader(this.user);
+        }
+    }, {
+        key: "calcStars",
+        value: function calcStars(starsParent, count) {
+            for (var i = 0; i < starsParent.length; i++) {
+                if (i < count) starsParent[i].classList = ['ion-md-star'];else starsParent[i].classList = ['ion-md-star-outline'];
+            }
+        }
+    }, {
+        key: "getUserInfo",
+        value: function getUserInfo() {
+            return {
+                first_name: 'Joan',
+                last_name: 'Doe',
+                location: 'Newport Beach, CA',
+                web: 'www.seller.com',
+                number: '(949) 325-68594',
+                stars: 4,
+                viewsCount: 16
+            };
+        }
     }]);
 
     return MyApp;
@@ -9227,65 +9394,14 @@ var AppHeader = function (_HTMLElement) {
     _createClass(AppHeader, [{
         key: 'createdCallback',
         value: function createdCallback() {
-            var _classList,
-                _this2 = this;
+            var _classList;
 
             (_classList = this.classList).add.apply(_classList, _toConsumableArray(AppHeader.CLASSES));
             this.innerHTML = AppHeader.TEMPLATE;
-
-            this.userName = this.querySelector('.header__info--name');
-            this.userLocation = this.querySelector('.header__info--location span');
-            this.userNumber = this.querySelector('.header__info--number span');
-            this.reviewsCount = this.querySelector('.header__review--count');
-            this.reviewsStars = this.querySelectorAll('.header__review--stars>.icon');
-            this.logoutButton = this.querySelector('.header__button--logout');
-            this.uploadCoverPhotoButton = this.querySelector('.header__button--cover-photo');
-
-            this.logoutButton.addEventListener('click', function () {
-                return _this2.logout();
-            });
-            this.uploadCoverPhotoButton.addEventListener('click', function () {
-                return _this2.uploadCoverPhoto();
-            });
-
-            var user = this.getUserInfo();
-            this.userName.textContent = '' + user.name;
-            this.userLocation.textContent = '' + user.location;
-            this.userNumber.textContent = '' + user.number;
-            this.reviewsCount.textContent = user.viewsCount + ' Reviews';
-            this.calcStars(this.reviewsStars, user.stars);
         }
     }, {
         key: 'attributeChangedCallback',
         value: function attributeChangedCallback(attributeName) {}
-    }, {
-        key: 'getUserInfo',
-        value: function getUserInfo() {
-            return {
-                name: 'Jessica Parker',
-                location: 'Newport Beach, CA',
-                number: '(949) 325-68594',
-                stars: 4,
-                viewsCount: 16
-            };
-        }
-    }, {
-        key: 'calcStars',
-        value: function calcStars(starsParent, count) {
-            for (var i = 0; i < starsParent.length; i++) {
-                if (i < count) starsParent[i].classList = ['ion-md-star'];else starsParent[i].classList = ['ion-md-star-outline'];
-            }
-        }
-    }, {
-        key: 'uploadCoverPhoto',
-        value: function uploadCoverPhoto() {
-            alert('should upload cover photo');
-        }
-    }, {
-        key: 'logout',
-        value: function logout() {
-            alert('should do logout');
-        }
     }]);
 
     return AppHeader;
@@ -9323,10 +9439,7 @@ var AppContent = function (_HTMLElement) {
     function AppContent() {
         _classCallCheck(this, AppContent);
 
-        var _this = _possibleConstructorReturn(this, (AppContent.__proto__ || Object.getPrototypeOf(AppContent)).call(this));
-
-        _this.user = {};
-        return _this;
+        return _possibleConstructorReturn(this, (AppContent.__proto__ || Object.getPrototypeOf(AppContent)).call(this));
     }
 
     _createClass(AppContent, [{
@@ -9334,141 +9447,12 @@ var AppContent = function (_HTMLElement) {
         value: function createdCallback() {
             var _classList;
 
-            this.user = this.getUserInfo();
-
             (_classList = this.classList).add.apply(_classList, _toConsumableArray(AppContent.CLASSES));
             this.innerHTML = AppContent.TEMPLATE;
-
-            this.mobileEditButton = this.querySelector('.tab-content__button--mobile-edit');
-            this.mobileEditButton.addEventListener('click', this.showMoblieForm.bind(this));
-
-            this.mobileFormCanelButton = this.querySelector('.mobile-form-actions__button--cancel');
-            this.mobileFormCanelButton.addEventListener('click', this.hideMoblieForm.bind(this));
-
-            this.mobileFormSaveButton = this.querySelector('.mobile-form-actions__button--save');
-            this.mobileFormSaveButton.addEventListener('click', this.saveMobileForm.bind(this));
-
-            this.desktopEditField = this.querySelectorAll('.details-field__value--action');
-            for (var i = 0; i < this.desktopEditField.length; i++) {
-                this.desktopEditField[i].addEventListener('click', this.showDesktopPopover.bind(this));
-            }
-
-            this.popoverCanelButton = this.querySelectorAll('.details-field__popover__button--cancel');
-            for (var i = 0; i < this.popoverCanelButton.length; i++) {
-                this.popoverCanelButton[i].addEventListener('click', this.hideDesktopPopover.bind(this));
-            }
-
-            this.popoverSaveButton = this.querySelectorAll('.details-field__popover__button--save');
-            for (var i = 0; i < this.popoverSaveButton.length; i++) {
-                this.popoverSaveButton[i].addEventListener('click', this.savePopoverValue.bind(this));
-            }
-
-            this.nameField = this.querySelector('.field-js-name > .details-field__value--field');
-            this.webField = this.querySelector('.field-js-web > .details-field__value--field');
-            this.numberField = this.querySelector('.field-js-number > .details-field__value--field');
-            this.locationField = this.querySelector('.field-js-location > .details-field__value--field');
-
-            this.nameField.textContent = this.user.first_name + ' ' + this.user.last_name;
-            this.webField.textContent = this.user.web;
-            this.numberField.textContent = this.user.number;
-            this.locationField.textContent = this.user.location;
         }
     }, {
         key: 'attributeChangedCallback',
         value: function attributeChangedCallback(attributeName) {}
-    }, {
-        key: 'showMoblieForm',
-        value: function showMoblieForm(evt) {
-            var fields = evt.target.closest('.tab-content').querySelectorAll('.mobile-form .mobile-form-field input');
-
-            for (var i = 0; i < fields.length; i++) {
-                fields[i].value = this.user[fields[i].getAttribute('name')];
-                fields[i].parentNode.classList.add('is-dirty');
-            }
-
-            evt.target.closest('.details').classList.add('hide');
-            evt.target.closest('.tab-content').querySelector('.mobile-form').classList.remove('hide');
-        }
-    }, {
-        key: 'hideMoblieForm',
-        value: function hideMoblieForm(evt) {
-            evt.target.closest('.mobile-form').classList.add('hide');
-            evt.target.closest('.tab-content').querySelector('.details').classList.remove('hide');
-        }
-    }, {
-        key: 'saveMobileForm',
-        value: function saveMobileForm(evt) {
-            var formFields = evt.target.closest('.tab-content').querySelectorAll('.mobile-form .mobile-form-field input');
-            var viewFields = Array.from(evt.target.closest('.tab-content').querySelectorAll('.details .details-field .details-field__value--field'));
-
-            for (var i = 0; i < formFields.length; i++) {
-                this.user[formFields[i].getAttribute('name')] = formFields[i].value;
-
-                if (formFields[i].getAttribute('name') === 'first_name') {
-                    viewFields.find(function (field) {
-                        return field.getAttribute('for') === 'name';
-                    }).textContent = formFields[i].value;
-                } else if (formFields[i].getAttribute('name') === 'last_name') {
-                    viewFields.find(function (field) {
-                        return field.getAttribute('for') === 'name';
-                    }).textContent += ' ' + formFields[i].value;
-                } else {
-                    viewFields.find(function (field) {
-                        return field.getAttribute('for') === formFields[i].getAttribute('name');
-                    }).textContent = formFields[i].value;
-                }
-            }
-
-            this.hideMoblieForm(evt);
-        }
-    }, {
-        key: 'showDesktopPopover',
-        value: function showDesktopPopover(evt) {
-            var fieldType = evt.target.closest('.details-field__value').querySelector('.details-field__value--field').getAttribute('for');
-            var popover = evt.target.closest('.details-field').querySelector('.details-field__popover');
-            var popoverInput = evt.target.closest('.details-field').querySelector('.details-field__popover .mdl-textfield__input');
-
-            if (fieldType !== 'name') {
-                popoverInput.value = this.user[fieldType];
-            } else {
-                popoverInput.value = this.user['first_name'] + ' ' + this.user['last_name'];
-            }
-
-            popoverInput.parentNode.classList.add('is-dirty');
-            popover.classList.add('show');
-        }
-    }, {
-        key: 'hideDesktopPopover',
-        value: function hideDesktopPopover(evt) {
-            evt.target.closest('.details-field__popover').classList.remove('show');
-        }
-    }, {
-        key: 'savePopoverValue',
-        value: function savePopoverValue(evt) {
-            var popoverInput = evt.target.closest('.details-field__popover').querySelector('.mdl-textfield__input');
-            var viewField = evt.target.closest('.details-field').querySelector('.details-field__value--field');
-
-            viewField.textContent = popoverInput.value;
-            if (popoverInput.getAttribute('name') !== 'name') {
-                this.user[popoverInput.getAttribute('name')] = popoverInput.value;
-            } else {
-                this.user['first_name'] = popoverInput.value.split(' ')[0];
-                this.user['last_name'] = popoverInput.value.split(' ')[1];
-            }
-
-            this.hideDesktopPopover(evt);
-        }
-    }, {
-        key: 'getUserInfo',
-        value: function getUserInfo() {
-            return {
-                first_name: 'Joan',
-                last_name: 'Doe',
-                location: 'Newport Beach, CA',
-                web: 'www.seller.com',
-                number: '(949) 325-68594'
-            };
-        }
     }]);
 
     return AppContent;
