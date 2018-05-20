@@ -135,7 +135,7 @@ class AppContent extends HTMLElement {
 }
 
 AppContent.TEMPLATE = `
-    <div class="tab-content">
+    <div class="tab-content" id="about-tab">
         <h6 class="tab-content__header">About</h6>
 
         <div class="details">
@@ -276,6 +276,22 @@ AppContent.TEMPLATE = `
                 <label class="mdl-textfield__label" for="sample3">City, state & zip</label>
             </div>
         </div>
+    </div>
+
+    <div class="tab-content" id="settings-tab">
+        <h6 class="tab-content__header">Settings</h6>
+    </div>
+
+    <div class="tab-content" id="option1-tab">
+        <h6 class="tab-content__header">Option1</h6>
+    </div>
+
+    <div class="tab-content" id="option2-tab">
+        <h6 class="tab-content__header">Option2</h6>
+    </div>
+
+    <div class="tab-content" id="option3-tab">
+        <h6 class="tab-content__header">Option3</h6>
     </div>
 `;
 

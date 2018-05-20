@@ -7,11 +7,24 @@
         margin: 10px 0px 30px;
         border-top: 1px solid $grey-color;
         border-bottom: 1px solid $grey-color;
+        padding: 0px 20px 40px;
     }
     .hide {
         display: none;
     }
     .tab-content {
+        position: absolute;
+        top: 0px;
+        background: #fff;
+        width: 100%;
+        min-height: 400px;
+        @include descending-z-index;
+        &.active {
+            z-index: 99;
+        }
+        @media #{$device-phone} {
+            width: calc(100% - 40px);
+        }
         &__header {
             color: #727e88;
         }
@@ -24,7 +37,7 @@
                 font-size: 17px;
                 position: absolute;
                 top: 23px;
-                right: 30px;
+                right: 0px;
                 background-color: #ecf1f5;
                 color: #727e88;
                 box-shadow: none;
@@ -118,7 +131,7 @@
             &-actions {
                 position: absolute;
                 top: 17px;
-                right: 10px;
+                right: 0px;
                 &__button {
                     &--save,
                     &--cancel {

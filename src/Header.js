@@ -97,21 +97,21 @@ AppHeader.TEMPLATE = `
 
     <div class="header__menus mdl-card__actions mdl-card--border">
         <div class="header__menus--buttons">
-            <button class="mdl-button mdl-js-button mdl-button--accent active">
+            <a href="#about-tab" class="mdl-button mdl-js-button mdl-button--accent active">
                 About
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--accent">
+            </a>
+            <a href="#settings-tab" class="mdl-button mdl-js-button mdl-button--accent">
                 Settings
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--accent">
+            </a>
+            <a href="#option1-tab" class="mdl-button mdl-js-button mdl-button--accent">
                 Option1
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--accent">
+            </a>
+            <a href="#option2-tab" class="mdl-button mdl-js-button mdl-button--accent">
                 Option2
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--accent">
+            </a>
+            <a href="#option3-tab" class="mdl-button mdl-js-button mdl-button--accent">
                 Option3
-            </button>
+            </a>
         </div>
         <div class="header__menus--followers">
             <button class="followers__button--add mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
