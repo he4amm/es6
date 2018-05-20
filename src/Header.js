@@ -2,6 +2,10 @@
 
 class AppHeader extends HTMLElement { 
 
+    constructor() {
+        super();
+    }
+
     createdCallback() {
         this.classList.add(...AppHeader.CLASSES);
         this.innerHTML = AppHeader.TEMPLATE;
@@ -14,8 +18,6 @@ class AppHeader extends HTMLElement {
         this.logoutButton = this.querySelector('.header__button--logout');
         this.uploadCoverPhotoButton = this.querySelector('.header__button--cover-photo');
 
-        // this.headerMenus = this.querySelector('.mdl-tabs__tab');
-        // this.headerMenus.addEventListener('click', () => this.changeView());
         this.logoutButton.addEventListener('click', () => this.logout());
         this.uploadCoverPhotoButton.addEventListener('click', () => this.uploadCoverPhoto());
 
@@ -28,10 +30,6 @@ class AppHeader extends HTMLElement {
     }
 
     attributeChangedCallback(attributeName) {
-    }
-
-    changeView() {
-        alert('clicked');
     }
 
     getUserInfo() {
