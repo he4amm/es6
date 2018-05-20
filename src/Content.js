@@ -25,17 +25,17 @@ class AppContent extends HTMLElement {
 
         this.desktopEditField = this.querySelectorAll('.details-field__value--action');
         for (var i = 0; i < this.desktopEditField.length; i++) {
-            this.desktopEditField[i].addEventListener('click', this.showDesktopPopover);
+            this.desktopEditField[i].addEventListener('click', this.showDesktopPopover.bind(this));
         }
 
         this.popoverCanelButton = this.querySelectorAll('.details-field__popover__button--cancel');
         for (var i = 0; i < this.popoverCanelButton.length; i++) {
-            this.popoverCanelButton[i].addEventListener('click', this.hideDesktopPopover);
+            this.popoverCanelButton[i].addEventListener('click', this.hideDesktopPopover.bind(this));
         }
 
         this.popoverSaveButton = this.querySelectorAll('.details-field__popover__button--save');
         for (var i = 0; i < this.popoverSaveButton.length; i++) {
-            this.popoverSaveButton[i].addEventListener('click', this.changeValue);
+            this.popoverSaveButton[i].addEventListener('click', this.savePopoverValue.bind(this));
         }
 
         this.nameField = this.querySelector('.field-js-name > .details-field__value--field');
@@ -76,7 +76,7 @@ class AppContent extends HTMLElement {
         
         for (var i = 0; i < formFields.length; i++) {
             this.user[formFields[i].getAttribute('name')] = formFields[i].value;
-            
+
             if (formFields[i].getAttribute('name') === 'first_name'){
                 viewFields.find(field => field.getAttribute('for') === 'name').textContent = formFields[i].value;
             } else if (formFields[i].getAttribute('name') === 'last_name'){
@@ -89,21 +89,38 @@ class AppContent extends HTMLElement {
         this.hideMoblieForm(evt);
     }
 
-    showDesktopPopover() {
-        let value = this.parentNode.querySelector('.details-field__value--field').textContent;
-        this.parentNode.parentNode.querySelector('.details-field__popover .mdl-textfield__input').value = value;
-        this.parentNode.parentNode.querySelector('.details-field__popover .mdl-textfield__input').parentNode.classList.add('is-dirty');
-        this.parentNode.parentNode.querySelector('.details-field__popover').classList.add('show');
+    showDesktopPopover(evt) {
+        let fieldType = evt.target.closest('.details-field__value').querySelector('.details-field__value--field').getAttribute('for');
+        let popover = evt.target.closest('.details-field').querySelector('.details-field__popover');
+        let popoverInput = evt.target.closest('.details-field').querySelector('.details-field__popover .mdl-textfield__input');
+
+        if ( fieldType !== 'name'){
+            popoverInput.value = this.user[fieldType];
+        } else {
+            popoverInput.value = `${this.user['first_name']} ${this.user['last_name']}`;
+        }
+
+        popoverInput.parentNode.classList.add('is-dirty');
+        popover.classList.add('show');
     }
 
-    hideDesktopPopover() {
-        this.parentNode.classList.remove('show');
+    hideDesktopPopover(evt) {
+        evt.target.closest('.details-field__popover').classList.remove('show');
     }
 
-    changeValue() {
-        let popoverValue = this.parentNode.querySelector('.mdl-textfield__input').value;
-        this.parentNode.parentNode.querySelector('.details-field__value--field').textContent = popoverValue;
-        this.parentNode.classList.remove('show');
+    savePopoverValue(evt) {
+        let popoverInput = evt.target.closest('.details-field__popover').querySelector('.mdl-textfield__input');
+        let viewField = evt.target.closest('.details-field').querySelector('.details-field__value--field');
+
+        viewField.textContent = popoverInput.value;
+        if (popoverInput.getAttribute('name') !== 'name') {
+            this.user[popoverInput.getAttribute('name')] = popoverInput.value;
+        }else {
+            this.user['first_name'] = popoverInput.value.split(' ')[0];
+            this.user['last_name'] = popoverInput.value.split(' ')[1];
+        }
+
+        this.hideDesktopPopover(evt);
     }
 
     getUserInfo() {
@@ -136,7 +153,7 @@ AppContent.TEMPLATE = `
                 
                 <div class="details-field__popover">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample3">
+                        <input class="mdl-textfield__input" type="text" name="name">
                         <label class="mdl-textfield__label" for="sample3">Name</label>
                     </div>
                     <button class="details-field__popover__button--save mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -161,7 +178,7 @@ AppContent.TEMPLATE = `
                 
                 <div class="details-field__popover">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample3">
+                        <input class="mdl-textfield__input" type="text" name="web">
                         <label class="mdl-textfield__label" for="sample3">Web</label>
                     </div>
                     <button class="details-field__popover__button--save mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -186,7 +203,7 @@ AppContent.TEMPLATE = `
                 
                 <div class="details-field__popover">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample3">
+                        <input class="mdl-textfield__input" type="text" name="number">
                         <label class="mdl-textfield__label" for="sample3">Number</label>
                     </div>
                     <button class="details-field__popover__button--save mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -211,7 +228,7 @@ AppContent.TEMPLATE = `
                 
                 <div class="details-field__popover">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sample3">
+                        <input class="mdl-textfield__input" type="text" name="location">
                         <label class="mdl-textfield__label" for="sample3">City, State & zip</label>
                     </div>
                     <button class="details-field__popover__button--save mdl-button mdl-js-button mdl-js-ripple-effect">
