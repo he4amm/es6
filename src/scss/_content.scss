@@ -1,12 +1,15 @@
 .content {
     width: 100%;
-    padding: 0px 25px;
+    padding: 0px 25px 40px;
     min-height: 400px;
     @media #{$device-phone} {
         box-shadow: none;
         margin: 10px 0px 30px;
         border-top: 1px solid $grey-color;
         border-bottom: 1px solid $grey-color;
+    }
+    .hide {
+        display: none;
     }
     .tab-content {
         &__header {
@@ -108,6 +111,32 @@
                             border: solid 1px #007ee5;
                         }
                     }
+                }
+            }
+        }
+        .mobile-form {
+            &-actions {
+                position: absolute;
+                top: 17px;
+                right: 10px;
+                &__button {
+                    &--save,
+                    &--cancel {
+                        font-size: 14px;
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: 1.57;
+                        letter-spacing: normal;
+                        text-align: left;
+                        color: #007ee5;
+                    }
+                }
+            }
+            &-field {
+                width: 100%;
+                label {
+                    color: #a6b0b7;
                 }
             }
         }
